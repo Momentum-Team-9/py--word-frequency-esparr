@@ -4,17 +4,22 @@ STOP_WORDS = [
     'will', 'with'
 ]
 
-
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
     import string
+    word_count = {}
     with open(file) as file_doc:
         text = file_doc.read()
         for i in text:
             if i in string.punctuation:
                 text = text.replace(i, "")
+    text = text.replace("\n", " ")
+    text = text.lower()
+    text = text.split(" ")
+    
     print(type(text))
     print(text)
+    print(file_doc.closed)
 
 # - remove punctuation
 # - normalize all words to lowercase
