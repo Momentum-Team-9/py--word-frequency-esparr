@@ -14,6 +14,7 @@ def print_word_freq(file):
         text = file_doc.read()
 
     text = text.replace("\n", " ")
+    
 
     for i in text:
             if i in string.punctuation:
@@ -26,11 +27,14 @@ def print_word_freq(file):
     filtered_word_list = [item for item in word_list if item not in stop_word_set]
     sorted_word_list = sorted(filtered_word_list)
 
-    if i not in word_count:
-        for i in sorted_word_list:
-            word_count[i] = sorted_word_list.count(i)
-    print(word_count)
+    for i in word_list:
+        if i not in word_count:
+            for i in sorted_word_list:
+                word_count[i] = sorted_word_list.count(i)
 
+    value_sorted_word_count = dict(sorted(word_count.items(), key=lambda item: item[1], reverse=True))
+
+    print(value_sorted_word_count)
 
     # print(type(text))
     # print(file_doc.closed)
