@@ -7,8 +7,20 @@ STOP_WORDS = [
 
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
-    pass
+    import string
+    with open(file) as file_doc:
+        text = file_doc.read()
+        for i in text:
+            if i in string.punctuation:
+                text = text.replace(i, "")
+    print(type(text))
+    print(text)
 
+# - remove punctuation
+# - normalize all words to lowercase
+# - remove "stop words" -- words used so frequently they are ignored
+# - go through the file word by word and keep a count of how often each word is used
+# - create a dictionary with value of word and a key of count. 
 
 if __name__ == "__main__":
     import argparse
