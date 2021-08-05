@@ -6,20 +6,15 @@ STOP_WORDS = [
 
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
-    import string
-
     word_count = {}
 
     with open(file) as file_doc:
         text = file_doc.read()
 
     text = text.replace("\n", " ")
-    
 
-    for i in text:
-            if i in string.punctuation:
-                text = text.replace(i, "")
-    
+    text = remove_punctuation(text)
+
     text = text.lower()
     word_list = text.split(" ")
 
@@ -34,14 +29,19 @@ def print_word_freq(file):
 
     value_sorted_word_count = dict(sorted(word_count.items(), key=lambda item: item[1], reverse=True))
 
-    print(value_sorted_word_count)
+    for key, value in value_sorted_word_count.items():
+        print(key.rjust(15), ' | ', str(value).center(2), value * ('*'))
 
     # print(type(text))
     # print(file_doc.closed)
 
-# - remove "stop words" -- words used so frequently they are ignored
-# - go through the file word by word and keep a count of how often each word is used
-# - create a dictionary with value of word and a key of count. 
+def remove_punctuation(text):
+    import string
+    result = ""
+    for i in text:
+        if i not in string.punctuation:
+            result += i
+    return result
 
 if __name__ == "__main__":
     import argparse
